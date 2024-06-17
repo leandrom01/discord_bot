@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const { Routes } = require("discord-api-types/v10");
 const { token, clientId, guildId } = require("./config.json");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -25,7 +25,7 @@ for (const file of commandFiles) {
   }
 }
 
-const rest = new REST({ version: "9" }).setToken(token);
+const rest = new REST().setToken(token);
 
 (async () => {
   try {

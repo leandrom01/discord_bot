@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a really basic discord bot that uses discord.js. For now it just creates slash commands for a specific server but i have already implemented the bare bones for it to give all the servers (that the bot is in) the slash comamnds.
+This is a really basic discord bot that uses discord.js. For now it just creates slash commands for a specific server but i have already implemented the bare bones for it to give all the servers (that the bot is in) the slash commands.
 
 ## Set up
 
