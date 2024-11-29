@@ -1,0 +1,25 @@
+
+Start your bot with pm2:
+Run the following command to start your bot using pm2:
+pm2 start index.js --name "discord-bot"
+The --name option is optional, but it helps you identify your bot process easily.
+
+Save the process list:
+To ensure pm2 restarts your bot on system reboots, save the current process list:
+pm2 save
+
+Set up pm2 to start on boot:
+To configure pm2 to start on system boot, run the following command:
+pm2 startup
+
+To see the list of running processes:
+pm2 list
+
+To stop your bot:
+pm2 stop discord-bot
+
+To restart your bot:
+pm2 restart discord-bot
+
+To view logs:
+pm2 logs discord-bot
