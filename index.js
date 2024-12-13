@@ -5,7 +5,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const { token, clientId, guildId } = require("./config.json");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions] });
 
 client.commands = new Collection();
 
@@ -48,6 +48,7 @@ const rest = new REST().setToken(token);
 
 client.once("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -71,6 +72,18 @@ client.on("interactionCreate", async (interaction) => {
         content: "There was an error while executing this command!",
         ephemeral: true,
       });
+    }
+  }
+});
+
+client.on("messageReactionAdd", async (reaction, user) => {
+
+  if (reaction.emoji.name === "🔔" && !user.bot) {
+    const member = await reaction.message.guild.members.fetch(user.id);
+    const subscriberRole = reaction.message.guild.roles.cache.get("1317198251203625020");
+
+    if (!member.roles.cache.has(subscriberRole.id)) {
+      await member.roles.add(subscriberRole);
     }
   }
 });
