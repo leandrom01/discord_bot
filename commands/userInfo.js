@@ -16,7 +16,7 @@ module.exports = {
     if (!user) {
       user = interaction.user;
     }
-
+    console.log(user);
     // Create an embedded message with user info
     const exampleEmbed = new EmbedBuilder()
       .setColor(0x0099ff)
@@ -24,13 +24,20 @@ module.exports = {
       .setDescription(`Information about ${user.username}`)
       .setThumbnail(user.displayAvatarURL())
       .addFields(
-        { name: "Username", value: user.username, inline: true },
+        { 
+          name: "Username",
+          value: user.username, 
+          inline: true },
         {
           name: "Hashtag",
           value: `#${user.discriminator}`,
           inline: true,
         },
-        { name: "ID", value: user.id, inline: true }
+        { 
+          name: "ID", 
+          value: user.id, 
+          inline: true 
+        }
       )
       .setTimestamp()
       .setFooter({

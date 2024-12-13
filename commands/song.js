@@ -30,8 +30,8 @@ module.exports = {
             const endTime = timestamps.end;
             const currentTime = Date.now();
 
-            const elapsedTime = Math.floor((currentTime - startTime) / 1000); // Elapsed time in seconds
-            const totalTime = Math.floor((endTime - startTime) / 1000); // Total song duration in seconds
+            const elapsedTime = Math.floor((currentTime - startTime) / 1000); 
+            const totalTime = Math.floor((endTime - startTime) / 1000); 
 
             // Format times as mm:ss
             const formatTime = (time) => {
@@ -48,14 +48,13 @@ module.exports = {
             const progressPosition = Math.round((elapsedTime / totalTime) * progressBarLength);
             const progressBar = '▬'.repeat(progressPosition) + '🔘' + '▬'.repeat(progressBarLength - progressPosition);
 
-            // Embed response
             return interaction.reply({
                 embeds: [{
                     title: `🎵 Now Playing: ${song}`,
                     description: `**Artist:** ${artist}\n\n` +
                                  `\`${currentFormatted}\` ${progressBar} \`${totalFormatted}\`\n\n`,
                     thumbnail: { url: `https://i.scdn.co/image/${assets.largeImage.slice(8)}` },
-                    color: 0x1DB954, // Spotify green
+                    color: 0x1DB954, 
                 }]
             });
         }
