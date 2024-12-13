@@ -19,13 +19,17 @@ module.exports = {
       // List all commands
       const helpEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle("Available Commands")
-        .setDescription("Here is a list of all available commands:");
+        .setTitle("🌟 Available Commands 🌟")
+        .setDescription("Here is a list of all available commands:")
+        .setFooter({
+          text: "Use /help [command] for more details about a specific command.",
+        })
+        .setTimestamp();
 
       commands.forEach((command) => {
         helpEmbed.addFields({
           name: `/${command.data.name}`,
-          value: command.data.description,
+          value: `${command.data.description} \n`,
         });
       });
 
@@ -36,7 +40,7 @@ module.exports = {
 
       if (!command) {
         await interaction.reply({
-          content: "That command does not exist!",
+          content: "⚠️ That command does not exist! Please try again.",
           ephemeral: true,
         });
         return;
@@ -44,15 +48,21 @@ module.exports = {
 
       const commandEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle(`/${command.data.name}`)
-        .setDescription(command.data.description)
+        .setTitle(`📝 Command: /${command.data.name}`)
         .addFields(
           {
             name: "Description",
             value: command.data.description || "No description provided.",
           },
-          { name: "Usage", value: `/${command.data.name}` }
-        );
+          {
+            name: "Usage",
+            value: `/${command.data.name}`,
+          }
+        )
+        .setFooter({
+          text: `Use /help to view all commands.`,
+        })
+        .setTimestamp();
 
       await interaction.reply({ embeds: [commandEmbed] });
     }

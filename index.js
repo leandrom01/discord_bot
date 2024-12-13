@@ -5,7 +5,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const { token, clientId, guildId } = require("./config.json");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences] });
 
 client.commands = new Collection();
 
