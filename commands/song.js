@@ -16,24 +16,23 @@ module.exports = {
             return interaction.reply(`${user.username} is offline or has no activities.`);
         }
 
-
-
         const spotifyActivity = member.presence.activities.find(activity => {
             return (activity.type === 2 && activity.name === 'Spotify') 
         });
+        console.log(spotifyActivity)
 
         if (spotifyActivity) {
-            const { details: song, state: artist, timestamps, assets } = spotifyActivity;
+            const { details: song, state: artist, timestamps, assets, syncId} = spotifyActivity;
+            console.log(spotifyActivity);
 
-            // Calculate elapsed and total time
             const startTime = timestamps.start;
             const endTime = timestamps.end;
             const currentTime = Date.now();
 
-            const elapsedTime = Math.floor((currentTime - startTime) / 1000); 
+            const elapsedTime = Math.round((currentTime - startTime) / 1000); 
             const totalTime = Math.floor((endTime - startTime) / 1000); 
 
-            // Format times as mm:ss
+        
             const formatTime = (time) => {
                 const minutes = Math.floor(time / 60);
                 const seconds = time % 60;
@@ -43,8 +42,7 @@ module.exports = {
             const currentFormatted = formatTime(elapsedTime);
             const totalFormatted = formatTime(totalTime);
 
-            // Generate a progress bar
-            const progressBarLength = 20; 
+            const progressBarLength = 10; 
             const progressPosition = Math.round((elapsedTime / totalTime) * progressBarLength);
             const progressBar = '▬'.repeat(progressPosition) + '🔘' + '▬'.repeat(progressBarLength - progressPosition);
 
@@ -55,6 +53,7 @@ module.exports = {
                                  `\`${currentFormatted}\` ${progressBar} \`${totalFormatted}\`\n\n`,
                     thumbnail: { url: `https://i.scdn.co/image/${assets.largeImage.slice(8)}` },
                     color: 0x1DB954, 
+                    url: ` https://open.spotify.com/track/${syncId}`
                 }]
             });
         }

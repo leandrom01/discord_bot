@@ -31,7 +31,7 @@ const rest = new REST().setToken(token);
   try {
     const commands = client.commands.map((command) => command.data.toJSON());
     console.log("Registering commands:", commands);
-
+    
     if (guildId) {
       await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
         body: commands,
